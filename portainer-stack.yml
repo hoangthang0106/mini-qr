@@ -1,0 +1,11 @@
+# Portainer-ready MiniQR stack (separate from upstream docker-compose.yml)
+# Uses a stable high host port; does not bind host 80/443.
+# Override MINIQR_PORT in Portainer's stack environment if 18285 is already in use.
+# Override MINIQR_IMAGE with ghcr.io/hoangthang0106/mini-qr:latest
+# only AFTER the fork's GitHub Actions has built and published a readable image.
+services:
+  mini-qr:
+    image: ${MINIQR_IMAGE:-ghcr.io/lyqht/mini-qr:latest}
+    restart: unless-stopped
+    ports:
+      - "${MINIQR_PORT:-18285}:8080"
